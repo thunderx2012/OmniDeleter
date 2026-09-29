@@ -1,0 +1,47 @@
+OmniDeleter v2026.09.29 package information
+
+This package contains the production Go source, go.mod, the amd64 Windows resource object containing the OmniDeleter application icon and RT_MANIFEST, the source manifest XML, icon assets, and the exact GUI build recipe.
+
+Build recipe:
+    PowerShell: .\build-release.ps1
+    GOOS=windows
+    GOARCH=amd64
+    CGO_ENABLED=0
+    go build -trimpath -buildvcs=false -ldflags="-H=windowsgui"
+
+Package contents are limited to production source and production build inputs. Non-production materials are intentionally excluded from the formal source package.
+
+UI / behavior baseline:
+    - 695x530 Classic Windows main layout and right-side ListBox remain unchanged.
+    - Existing standard buttons retain their original style, size, font, and interaction.
+    - One file selected: Rename File enabled; one directory selected: Directory Rescue enabled; zero/multiple selection disables both.
+    - Permanent Delete remains the separate bottom action.
+
+File Rename:
+    - Exactly one selected file.
+    - The dialog edits only the filename stem; the original extension is preserved automatically.
+    - Legal spaces are accepted; Windows-forbidden characters and control characters remain rejected.
+    - The Win32 rename operation uses the fully-qualified extended destination path with RootDirectory = NULL.
+    - FILE_RENAME_INFO.FileNameLength reports only the name bytes and excludes the terminating NUL.
+    - The variable-length FileName payload starts at its actual 20-byte field offset on Win64.
+    - No overwrite.
+    - A failed rename leaves the source file in place.
+
+Directory Rescue:
+    - Exactly one selected directory.
+    - Same-volume rescue only.
+    - Create a unique empty <volume root>\OmniDeleter_x container.
+    - Move the selected original directory itself to <volume root>\OmniDeleter_x\A.
+    - A is the original directory; its contents and internal structure are not rewritten.
+    - No Copy-then-Delete fallback and no automatic locker termination.
+    - On failure, the source is not intentionally deleted; cleanup is restricted to the newly-created empty rescue container after identity checks.
+    - On success, the original deep parent path is not deleted or reorganized, and the rescued directory is removed from the current OmniDeleter list.
+
+Existing permanent-deletion engine and security/recovery architecture remain the established baseline.
+
+Folder picker:
+    - Add Folder uses Windows IFileOpenDialog with FOS_PICKFOLDERS.
+    - The result is obtained through IShellItem and passed into the existing path handling architecture.
+
+Packaging policy:
+    - This source package contains only production source and production build inputs.

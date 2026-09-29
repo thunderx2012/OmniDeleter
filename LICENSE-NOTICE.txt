@@ -1,0 +1,7 @@
+OmniDeleter v2026.09.29
+
+No separate project LICENSE text was included in the supplied source snapshot used to build this release.
+
+This file is a packaging notice, not a substitute license and does not grant additional rights.
+The project's repository license, if any, is authoritative. If no license is provided by the repository,
+default applicable copyright law governs copying, modification, and redistribution.
