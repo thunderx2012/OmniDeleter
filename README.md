@@ -1,7 +1,9 @@
 # OmniDeleter
 
-![image](https://i.postimg.cc/CMtq07zJ/2026-09-29-223130.png)
 **Windows advanced permanent file deletion utility**
+
+![image](https://i.postimg.cc/CMtq07zJ/2026-09-29-223130.png)
+
 
 Version: `v2026.09.29`
 
