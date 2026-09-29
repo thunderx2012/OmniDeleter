@@ -2,9 +2,6 @@
 
 **Windows advanced permanent file deletion utility**
 
-![image](https://i.postimg.cc/CMtq07zJ/2026-09-29-223130.png)
-
-
 Version: `v2026.09.29`
 
 OmniDeleter is a Windows desktop file-processing and permanent-deletion utility. In addition to handling files and directories that ordinary Windows operations may have difficulty deleting, it provides single-file rename support and non-destructive path rescue for unusually deep or long directory paths.
